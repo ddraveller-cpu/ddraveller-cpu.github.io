@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深呼吸放松助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deep: {
+                            900: '#0f172a', // 深邃的午夜蓝
+                            800: '#1e293b', // 稍浅的蓝灰
+                        },
+                        accent: {
+                            light: '#38bdf8', // 天空蓝
+                            DEFAULT: '#0ea5e9', // 海洋蓝
+                            dark: '#0284c7', // 深海蓝
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            overflow: hidden; /* 防止背景动画导致滚动条 */
+        }
+
+        /* 玻璃拟态效果 */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* 呼吸圆环动画 */
+        .breathing-circle {
+            transition: transform 0.1s linear, opacity 0.3s ease;
+            box-shadow: 0 0 60px rgba(14, 165, 233, 0.3);
+        }
+
+        /* 进度条样式 */
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.1s linear;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* 隐藏滚动条 */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex items-center justify-center relative selection:bg-accent selection:text-white">
+
+    <!-- 背景装饰：柔和的动态光斑 -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-pink-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- 主容器 -->
+    <main class="w-full max-w-md p-6 relative z-10">
+        
+        <!-- 玻璃拟态卡片 -->
+        <div class="glass-panel rounded-3xl p-8 flex flex-col items-center justify-center text-center space-y-8">
+            
+            <!-- 顶部状态栏 -->
+            <div class="w-full flex justify-between items-center text-gray-400 text-sm font-medium px-2">
+                <span id="cycle-counter">循环: 0 / 0</span>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse" id="status-dot"></span>
+                    <span id="status-text">准备就绪</span>
+                </div>
+            </div>
+
+            <!-- 核心视觉区：圆环与文字 -->
+            <div class="relative w-64 h-64 flex items-center justify-center">
+                
+                <!-- SVG 进度条背景 -->
+                <svg class="absolute w-full h-full" viewBox="0 0 100 100">
+                    <circle class="text-gray-700 stroke-current" stroke-width="4" cx="50" cy="50" r="45" fill="transparent"></circle>
+                    <circle 
+                        id="progress-ring"
+                        class="text-accent progress-ring__circle stroke-current" 
+                        stroke-width="4" 
+                        stroke-linecap="round" 
+                        cx="50" cy="50" r="45" 
+                        fill="transparent" 
+                        stroke-dasharray="283" 
+                        stroke-dashoffset="283">
+                    </circle>
+                </svg>
+
+                <!-- 呼吸圆环 (视觉主体) -->
+                <div id="breath-visual" class="breathing-circle w-40 h-40 rounded-full bg-gradient-to-br from-accent-light to-accent-dark opacity-80 flex items-center justify-center relative z-10">
+                    <!-- 内部文字 -->
+                    <div class="flex flex-col items-center">
+                        <span id="instruction-text" class="text-2xl font-bold tracking-widest text-white drop-shadow-md">开始</span>
+                        <span id="timer-text" class="text-4xl font-light mt-1 text-white/90">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设置与控制区 -->
+            <div class="w-full space-y-6">
+                
+                <!-- 设置滑块 (收起/展开) -->
+                <div id="settings-panel" class="hidden transition-all duration-300 ease-in-out">
+                    <div class="space-y-4 bg-deep-900/50 p-4 rounded-xl border border-white/5">
+                        <div class="flex justify-between items-center text-sm">
+                            <label class="text-gray-300">吸气时长 (秒)</label>
+                            <span id="inhale-val" class="font-mono text-accent">4</span>
+                        </div>
+                        <input type="range" id="inhale-input" min="2" max="10" value="4" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                        
+                        <div class="flex justify-between items-center text-sm">
+                            <label class="text-gray-300">屏息时长 (秒)</label>
+                            <span id="hold-val" class="font-mono text-accent">7</span>
+                        </div>
+                        <input type="range" id="hold-input" min="2" max="10" value="7" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                        
+                        <div class="flex justify-between items-center text-sm">
+                            <label class="text-gray-300">呼气时长 (秒)</label>
+                            <span id="exhale-val" class="font-mono text-accent">8</span>
+                        </div>
+                        <input type="range" id="exhale-input" min="2" max="10" value="8" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                        
+                        <div class="flex justify-between items-center text-sm pt-2 border-t border-white/10">
+                            <label class="text-gray-300">目标循环次数</label>
+                            <span id="cycle-val" class="font-mono text-accent">5</span>
+                        </div>
+                        <input type="range" id="cycle-input" min="1" max="20" value="5" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                    </div>
+                </div>
+
+                <!-- 按钮组 -->
+                <div class="flex gap-4 justify-center">
+                    <button id="toggle-settings-btn" class="w-12 h-12 rounded-full bg-deep-800 hover:bg-deep-700 text-gray-400 hover:text-white transition-colors flex items-center justify-center border border-white/10 shadow-lg">
+                        <i class="fas fa-sliders-h"></i>
+                    </button>
+                    
+                    <button id="main-action-btn" class="flex-1 h-12 rounded-full bg-accent hover:bg-accent-light text-white font-semibold text-lg shadow-lg shadow-accent/30 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fas fa-play"></i>
+                        <span id="btn-text">开始练习</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部提示 -->
+        <p class="text-center text-gray-500 text-xs mt-6">
+            跟随圆环的缩放与数字的倒数调整呼吸节奏
+        </p>
+    </main>
+
+    <script>
+        // 配置与状态
+        const config = {
+            inhale: 4,
+            hold: 7,
+            exhale: 8,
+            totalCycles: 5
+        };
+
+        const state = {
+            isRunning: false,
+            phase: 'idle', // idle, inhale, hold, exhale, hold2
+            currentCycle: 0,
+            timeLeft: 0,
+            totalTimeInPhase: 0,
+            timerId: null,
+            animationFrameId: null
+        };
+
+        // DOM 元素
+        const els = {
+            btn: document.getElementById('main-action-btn'),
+            btnText: document.getElementById('btn-text'),
+            btnIcon: document.querySelector('#main-action-btn i'),
+            settingsBtn: document.getElementById('toggle-settings-btn'),
+            settingsPanel: document.getElementById('settings-panel'),
+            instruction: document.getElementById('instruction-text'),
+            timer: document.getElementById('timer-text'),
+            visual: document.getElementById('breath-visual'),
+            progressRing: document.getElementById('progress-ring'),
+            statusText: document.getElementById('status-text'),
+            statusDot: document.getElementById('status-dot'),
+            cycleCounter: document.getElementById('cycle-counter'),
+            inputs: {
+                inhale: document.getElementById('inhale-input'),
+                hold: document.getElementById('hold-input'),
+                exhale: document.getElementById('exhale-input'),
+                cycle: document.getElementById('cycle-input')
+            },
+            displays: {
+                inhale: document.getElementById('inhale-val'),
+                hold: document.getElementById('hold-val'),
+                exhale: document.getElementById('exhale-val'),
+                cycle: document.getElementById('cycle-val')
+            }
+        };
+
+        // 常量
+        const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 45; // r=45
+
+        // 初始化
+        function init() {
+            // 绑定事件
+            els.btn.addEventListener('click', toggleBreathing);
+            els.settingsBtn.addEventListener('click', toggleSettings);
+            
+            // 绑定输入事件
+            Object.keys(els.inputs).forEach(key => {
+                els.inputs[key].addEventListener('input', (e) => {
+                    const val = parseInt(e.target.value);
+                    config[key === 'cycle' ? 'totalCycles' : key] = val;
+                    els.displays[key].textContent = val;
+                    updateCycleDisplay();
+                });
+            });
+
+            updateCycleDisplay();
+            resetVisuals();
+        }
+
+        // 切换设置面板
+        function toggleSettings() {
+            els.settingsPanel.classList.toggle('hidden');
+        }
+
+        // 更新循环计数显示
+        function updateCycleDisplay() {
+            els.cycleCounter.textContent = `循环: ${state.currentCycle} / ${config.totalCycles}`;
+        }
+
+        // 切换开始/暂停
+        function toggleBreathing() {
+            if (state.isRunning) {
+                stopBreathing();
+            } else {
+                startBreathing();
+            }
+        }
+
+        // 开始呼吸逻辑
+        function startBreathing() {
+            if (state.currentCycle >= config.totalCycles) {
+                resetSession();
+            }
+
+            state.isRunning = true;
+            updateUIState(true);
+            startPhase('inhale');
+        }
+
+        // 停止呼吸逻辑
+        function stopBreathing() {
+            state.isRunning = false;
+            clearTimeout(state.timerId);
+            cancelAnimationFrame(state.animationFrameId);
+            updateUIState(false);
+            els.instruction.textContent = "已暂停";
+            els.timer.textContent = "--";
+            els.statusText.textContent = "已暂停";
+            els.statusDot.className = "w-2 h-2 rounded-full bg-yellow-500";
+        }
+
+        // 重置会话
+        function resetSession() {
+            state.currentCycle = 0;
+            updateCycleDisplay();
+        }
+
+        // 更新UI状态（按钮、文字）
+        function updateUIState(isRunning) {
+            if (isRunning) {
+                els.btnText.textContent = "暂停";
+                els.btnIcon.className = "fas fa-pause";
+                els.btn.classList.replace('bg-accent', 'bg-red-500');
+                els.btn.classList.replace('hover:bg-accent-light', 'hover:bg-red-600');
+                els.btn.classList.replace('shadow-accent/30', 'shadow-red-500/30');
+                els.settingsBtn.disabled = true;
+                els.settingsBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                els.statusText.textContent = "练习中...";
+                els.statusDot.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+            } else {
+                els.btnText.textContent = state.currentCycle > 0 ? "继续" : "开始练习";
+                els.btnIcon.className = "fas fa-play";
+                els.btn.classList.replace('bg-red-500', 'bg-accent');
+                els.btn.classList.replace('hover:bg-red-600', 'hover:bg-accent-light');
+                els.btn.classList.replace('shadow-red-500/30', 'shadow-accent/30');
+                els.settingsBtn.disabled = false;
+                els.settingsBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // 开始特定阶段
+        function startPhase(phase) {
+            state.phase = phase;
+            
+            // 设置阶段时长
+            switch(phase) {
+                case 'inhale':
+                    state.timeLeft = config.inhale;
+                    state.totalTimeInPhase = config.inhale;
+                    els.instruction.textContent = "吸气";
+                    els.instruction.className = "text-2xl font-bold tracking-widest text-white drop-shadow-md";
+                    break;
+                case 'hold':
+                    state.timeLeft = config.hold;
+                    state.totalTimeInPhase = config.hold;
+                    els.instruction.textContent = "屏息";
+                    els.instruction.className = "text-2xl font-bold tracking-widest text-accent-light drop-shadow-md";
+                    break;
+                case 'exhale':
+                    state.timeLeft = config.exhale;
+                    state.totalTimeInPhase = config.exhale;
+                    els.instruction.textContent = "呼气";
+                    els.instruction.className = "text-2xl font-bold tracking-widest text-white drop-shadow-md";
+                    break;
+            }
+
+            runTimer();
+        }
+
+        // 计时器核心逻辑
+        function runTimer() {
+            if (!state.isRunning) return;
+
+            // 更新数字显示
+            els.timer.textContent = state.timeLeft;
+
+            // 计算进度比例 (0 到 1)
+            const progress = (state.totalTimeInPhase - state.timeLeft) / state.totalTimeInPhase;
+            
+            // 更新圆环进度
+            const offset = CIRCLE_CIRCUMFERENCE - (progress * CIRCLE_CIRCUMFERENCE);
+            els.progressRing.style.strokeDashoffset = offset;
+
+            // 更新视觉动画 (缩放)
+            updateVisuals(progress);
+
+            if (state.timeLeft > 0) {
+                state.timeLeft--;
+                state.timerId = setTimeout(runTimer, 1000);
+            } else {
+                nextPhase();
+            }
+        }
+
+        // 更新视觉圆环的大小和透明度
+        function updateVisuals(progress) {
+            let scale = 1;
+            let opacity = 0.8;
+
+            if (state.phase === 'inhale') {
+                // 1 -> 1.5
+                scale = 1 + (progress * 0.5);
+                opacity = 0.8 + (progress * 0.2);
+            } else if (state.phase === 'hold') {
+                // 保持 1.5
+                scale = 1.5;
+                opacity = 1.0;
+            } else if (state.phase === 'exhale') {
+                // 1.5 -> 1
+                scale = 1.5 - (progress * 0.5);
+                opacity = 1.0 - (progress * 0.2);
+            }
+
+            els.visual.style.transform = `scale(${scale})`;
+            els.visual.style.opacity = opacity;
+        }
+
+        // 阶段切换逻辑
+        function nextPhase() {
+            if (state.phase === 'inhale') {
+                startPhase('hold');
+            } else if (state.phase === 'hold') {
+                startPhase('exhale');
+            } else if (state.phase === 'exhale') {
+                state.currentCycle++;
+                updateCycleDisplay();
+                
+                if (state.currentCycle >= config.totalCycles) {
+                    completeSession();
+                } else {
+                    startPhase('inhale');
+                }
+            }
+        }
+
+        // 完成会话
+        function completeSession() {
+            state.isRunning = false;
+            updateUIState(false);
+            els.instruction.textContent = "完成";
+            els.timer.textContent = "🎉";
+            els.statusText.textContent = "练习结束";
+            els.statusDot.className = "w-2 h-2 rounded-full bg-blue-500";
+            els.btnText.textContent = "重新开始";
+            resetVisuals();
+        }
+
+        // 重置视觉元素
+        function resetVisuals() {
+            els.visual.style.transform = `scale(1)`;
+            els.visual.style.opacity = `0.8`;
+            els.progressRing.style.strokeDashoffset = CIRCLE_CIRCUMFERENCE;
+        }
+
+        // 启动
+        init();
+
+    </script>
+</body>
+</html>
