@@ -6,7 +6,7 @@ const config = {
     inhale: 4,
     hold: 7,
     exhale: 8,
-    totalCycles: 5
+    totalCycles: 8
 };
 
 const state = {
