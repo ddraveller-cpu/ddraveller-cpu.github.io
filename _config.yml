@@ -8,7 +8,10 @@ subtitle: 'Leon的小站'
 description: '这是描述, 不知道写啥好'
 keywords:
 author: Leon Ding
-language: zh
+language: zh-CN
+i18n:
+  type: data
+  fallback_language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # URL

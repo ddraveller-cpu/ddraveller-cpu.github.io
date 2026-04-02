@@ -8,9 +8,21 @@ navbar:
   ground_glass:
     enable: true
 
+# 自定义 CSS/JS
+custom_css: /css/custom.css
+custom_js: 
+
+# 多语言
+language:
+  enable: true
+  default: zh-CN
+  switch_languages:
+    - zh-CN
+    - en
+
 # 首页
 index:
-  banner_img: https://r2.fluidweb.cn/material@3.0/volunteer.png
+  banner_img: https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=1920
   banner_img_height: 100
   slogan:
     enable: true
