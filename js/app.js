@@ -32,62 +32,19 @@ const articles = {
 
 // DOM Elements
 const themeBtn = document.getElementById('themeBtn');
-const themeMenu = document.getElementById('themeMenu');
 const langBtn = document.getElementById('langBtn');
-const langMenu = document.getElementById('langMenu');
 const backBtn = document.getElementById('backBtn');
 const pages = document.querySelectorAll('.page');
 const navLinks = document.querySelectorAll('.nav-links a');
 
-// Toggle dropdown menu
-function toggleMenu(menu) {
-  menu.classList.toggle('active');
-  // Close other menu
-  if (menu === themeMenu) {
-    langMenu.classList.remove('active');
-  } else {
-    themeMenu.classList.remove('active');
-  }
-}
-
-// Close menus when clicking outside
-document.addEventListener('click', (e) => {
-  if (!themeBtn.contains(e.target) && !themeMenu.contains(e.target)) {
-    themeMenu.classList.remove('active');
-  }
-  if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
-    langMenu.classList.remove('active');
-  }
+// Theme button click - toggle directly
+themeBtn.addEventListener('click', () => {
+  toggleTheme();
 });
 
-// Theme button click
-themeBtn.addEventListener('click', () => toggleMenu(themeMenu));
-
-// Language button click
-langBtn.addEventListener('click', () => toggleMenu(langMenu));
-
-// Theme selection
-themeMenu.querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const theme = btn.getAttribute('data-theme');
-    setTheme(theme);
-    themeMenu.classList.remove('active');
-    // Update active state
-    themeMenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
-
-// Language selection
-langMenu.querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const lang = btn.getAttribute('data-lang');
-    setLang(lang);
-    langMenu.classList.remove('active');
-    // Update active state
-    langMenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
+// Language button click - toggle directly
+langBtn.addEventListener('click', () => {
+  toggleLanguage();
 });
 
 // Navigation
@@ -165,18 +122,6 @@ backBtn.addEventListener('click', () => {
 
 // Initialize active states
 document.addEventListener('DOMContentLoaded', () => {
-  // Set initial theme active
-  themeMenu.querySelectorAll('button').forEach(btn => {
-    if (btn.getAttribute('data-theme') === currentTheme) {
-      btn.classList.add('active');
-    }
-  });
-  // Set initial language active
-  langMenu.querySelectorAll('button').forEach(btn => {
-    if (btn.getAttribute('data-lang') === currentLang) {
-      btn.classList.add('active');
-    }
-  });
   // Set initial nav active
   navLinks.forEach(link => {
     if (link.getAttribute('href') === '#home') {
