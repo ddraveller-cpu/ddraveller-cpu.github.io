@@ -1,24 +1,41 @@
-/* ===== Footer ===== */
+/* ===== Footer - Elegant Quote Style ===== */
 .footer {
-  padding: 2rem;
-  border-top: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  padding: var(--space-2xl) var(--space-md);
   text-align: center;
+  border-top: 1px solid var(--border-color);
 }
 
 .footer-content {
-  max-width: 900px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
-.footer-content p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.footer-quote {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.5;
 }
 
-.footer-content p:first-child {
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
+.footer-author {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-quote {
+    font-size: 1.25rem;
+  }
 }

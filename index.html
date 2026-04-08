@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Maple+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Han+Serif+CN:wght@400;500;600;700&family=Maple+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -58,56 +58,111 @@
 
   <!-- Main Content -->
   <main id="main">
-    <!-- Home Page -->
+    <!-- Home Page - 重构为沉浸式单幅背景 -->
     <section id="home" class="page active">
-      <div class="gallery-bg">
-        <div class="gallery-grid">
-          <div class="gallery-item" data-id="1">
-            <img src="images/starry-night.jpg" alt="The Starry Night">
-          </div>
-          <div class="gallery-item" data-id="2">
-            <img src="images/mona-lisa.jpg" alt="Mona Lisa">
-          </div>
-          <div class="gallery-item" data-id="3">
-            <img src="images/great-wave.jpg" alt="The Great Wave">
-          </div>
-          <div class="gallery-item" data-id="4">
-            <img src="images/pearl-earring.jpg" alt="Girl with a Pearl Earring">
-          </div>
-          <div class="gallery-item" data-id="5">
-            <img src="images/last-supper.jpg" alt="The Last Supper">
-          </div>
-          <div class="gallery-item" data-id="6">
-            <img src="images/creation-of-adam.jpg" alt="The Creation of Adam">
-          </div>
-          <div class="gallery-item" data-id="7">
-            <img src="images/birth-of-venus.jpg" alt="The Birth of Venus">
-          </div>
-          <div class="gallery-item" data-id="8">
-            <img src="images/the-kiss.jpg" alt="The Kiss">
+      <div class="hero-section">
+        <div class="hero-bg">
+          <img src="images/starry-night.jpg" alt="The Starry Night">
+          <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-tagline" data-i18n="heroTagline">艺术 · 生活 · 思考</div>
+          <h1 class="hero-title" data-i18n="heroTitle">在代码与画笔之间<br>寻找平衡</h1>
+          <p class="hero-subtitle" data-i18n="heroSubtitle">探索世界名画背后的故事，感受艺术跨越时空的力量</p>
+          <div class="hero-cta">
+            <a href="#blog" class="btn-primary" data-i18n="exploreBlog">探索博客</a>
+            <a href="#about" class="btn-secondary" data-i18n="aboutMe">关于我</a>
           </div>
         </div>
-        <div class="gallery-overlay"></div>
+        <div class="scroll-hint">
+          <div class="scroll-text" data-i18n="scrollHint">向下滚动</div>
+          <div class="scroll-line"></div>
+        </div>
       </div>
-      <div class="hero-content">
-        <h1 data-i18n="heroTitle">艺术 · 生活 · 思考</h1>
-        <p data-i18n="heroSubtitle">在代码与画笔之间寻找平衡</p>
+      
+      <!-- Featured Articles Section -->
+      <div class="featured-section">
+        <div class="container">
+          <h2 class="section-title" data-i18n="featuredTitle">精选文章</h2>
+          <div class="featured-grid">
+            <article class="featured-card featured-large" data-article="1">
+              <div class="featured-image">
+                <img src="images/starry-night.jpg" alt="Van Gogh">
+              </div>
+              <div class="featured-content">
+                <span class="featured-tag" data-i18n="tagPostImpressionism">后印象派</span>
+                <h3 data-i18n="article1Title">梵高：燃烧的灵魂</h3>
+                <p data-i18n="article1Excerpt">文森特·梵高，这位荷兰后印象派画家，用他短暂而炽热的生命，为世界留下了无数珍贵的艺术遗产...</p>
+                <div class="featured-meta">
+                  <span>2024-03-15</span>
+                  <span data-i18n="readTime8">8 分钟阅读</span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="featured-card" data-article="2">
+              <div class="featured-image">
+                <img src="images/great-wave.jpg" alt="Ukiyo-e">
+              </div>
+              <div class="featured-content">
+                <span class="featured-tag" data-i18n="tagUkiyoe">浮世绘</span>
+                <h3 data-i18n="article2Title">浮世绘的艺术魅力</h3>
+                <p data-i18n="article2Excerpt">浮世绘是日本江户时代兴起的一种独特的艺术形式...</p>
+                <div class="featured-meta">
+                  <span>2024-03-10</span>
+                  <span data-i18n="readTime6">6 分钟</span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="featured-card" data-article="3">
+              <div class="featured-image">
+                <img src="images/pearl-earring.jpg" alt="Vermeer">
+              </div>
+              <div class="featured-content">
+                <span class="featured-tag" data-i18n="tagLight">光影</span>
+                <h3 data-i18n="article3Title">光影大师维米尔</h3>
+                <p data-i18n="article3Excerpt">约翰内斯·维米尔是荷兰黄金时代最伟大的画家之一...</p>
+                <div class="featured-meta">
+                  <span>2024-03-05</span>
+                  <span data-i18n="readTime7">7 分钟</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          
+          <div class="view-all">
+            <a href="#blog" class="btn-text" data-i18n="viewAllArticles">查看全部文章 →</a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Blog Page -->
     <section id="blog" class="page">
       <div class="container">
-        <h1 class="page-title" data-i18n="blogTitle">博客文章</h1>
+        <div class="blog-header">
+          <h1 class="page-title" data-i18n="blogTitle">博客文章</h1>
+          <p class="page-subtitle" data-i18n="blogSubtitle">探索艺术史、鉴赏名画、分享艺术感悟</p>
+        </div>
+        
+        <div class="blog-categories">
+          <button class="category-btn active" data-filter="all" data-i18n="catAll">全部</button>
+          <button class="category-btn" data-filter="classical" data-i18n="catClassical">古典艺术</button>
+          <button class="category-btn" data-filter="modern" data-i18n="catModern">现代艺术</button>
+          <button class="category-btn" data-filter="eastern" data-i18n="catEastern">东方艺术</button>
+          <button class="category-btn" data-filter="contemporary" data-i18n="catContemporary">当代艺术</button>
+        </div>
+        
         <div class="blog-list">
-          <article class="blog-card" data-article="1">
+          <article class="blog-card" data-article="1" data-category="modern">
             <div class="blog-image">
               <img src="images/starry-night.jpg" alt="Van Gogh">
             </div>
             <div class="blog-content">
               <div class="blog-meta">
-                <span>2024-03-15</span>
-                <span data-i18n="readTime8">8 分钟</span>
+                <span class="blog-date">2024-03-15</span>
+                <span class="blog-readtime" data-i18n="readTime8">8 分钟</span>
               </div>
               <h2 data-i18n="article1Title">梵高：燃烧的灵魂</h2>
               <p data-i18n="article1Excerpt">文森特·梵高，这位荷兰后印象派画家，用他短暂而炽热的生命，为世界留下了无数珍贵的艺术遗产...</p>
@@ -119,14 +174,14 @@
             </div>
           </article>
 
-          <article class="blog-card" data-article="2">
+          <article class="blog-card" data-article="2" data-category="eastern">
             <div class="blog-image">
               <img src="images/great-wave.jpg" alt="Ukiyo-e">
             </div>
             <div class="blog-content">
               <div class="blog-meta">
-                <span>2024-03-10</span>
-                <span data-i18n="readTime6">6 分钟</span>
+                <span class="blog-date">2024-03-10</span>
+                <span class="blog-readtime" data-i18n="readTime6">6 分钟</span>
               </div>
               <h2 data-i18n="article2Title">浮世绘的艺术魅力</h2>
               <p data-i18n="article2Excerpt">浮世绘是日本江户时代兴起的一种独特的艺术形式，以其精美的线条和鲜明的色彩闻名于世...</p>
@@ -138,14 +193,14 @@
             </div>
           </article>
 
-          <article class="blog-card" data-article="3">
+          <article class="blog-card" data-article="3" data-category="classical">
             <div class="blog-image">
               <img src="images/pearl-earring.jpg" alt="Vermeer">
             </div>
             <div class="blog-content">
               <div class="blog-meta">
-                <span>2024-03-05</span>
-                <span data-i18n="readTime7">7 分钟</span>
+                <span class="blog-date">2024-03-05</span>
+                <span class="blog-readtime" data-i18n="readTime7">7 分钟</span>
               </div>
               <h2 data-i18n="article3Title">光影大师维米尔</h2>
               <p data-i18n="article3Excerpt">约翰内斯·维米尔是荷兰黄金时代最伟大的画家之一，他以其对光线的精妙处理而闻名...</p>
@@ -157,14 +212,14 @@
             </div>
           </article>
 
-          <article class="blog-card" data-article="4">
+          <article class="blog-card" data-article="4" data-category="classical">
             <div class="blog-image">
               <img src="images/mona-lisa.jpg" alt="Da Vinci">
             </div>
             <div class="blog-content">
               <div class="blog-meta">
-                <span>2024-02-28</span>
-                <span data-i18n="readTime10">10 分钟</span>
+                <span class="blog-date">2024-02-28</span>
+                <span class="blog-readtime" data-i18n="readTime10">10 分钟</span>
               </div>
               <h2 data-i18n="article4Title">达·芬奇的永恒之谜</h2>
               <p data-i18n="article4Excerpt">列奥纳多·达·芬奇是文艺复兴时期最杰出的代表之一。《蒙娜丽莎》那神秘的微笑...</p>
@@ -175,13 +230,54 @@
               </div>
             </div>
           </article>
+          
+          <article class="blog-card" data-article="5" data-category="modern">
+            <div class="blog-image">
+              <img src="images/creation-of-adam.jpg" alt="Renaissance">
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="blog-date">2024-02-20</span>
+                <span class="blog-readtime" data-i18n="readTime9">9 分钟</span>
+              </div>
+              <h2 data-i18n="article5Title">米开朗基罗：神与人之间</h2>
+              <p data-i18n="article5Excerpt">米开朗基罗·博那罗蒂，文艺复兴三杰之一，他的作品《创世纪》和《大卫》至今仍是人类艺术史上的巅峰...</p>
+              <div class="blog-tags">
+                <span>文艺复兴</span>
+                <span>米开朗基罗</span>
+                <span>西斯廷教堂</span>
+              </div>
+            </div>
+          </article>
+          
+          <article class="blog-card" data-article="6" data-category="contemporary">
+            <div class="blog-image">
+              <img src="images/the-kiss.jpg" alt="Klimt">
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="blog-date">2024-02-15</span>
+                <span class="blog-readtime" data-i18n="readTime7">7 分钟</span>
+              </div>
+              <h2 data-i18n="article6Title">克里姆特：金色梦境</h2>
+              <p data-i18n="article6Excerpt">古斯塔夫·克里姆特，维也纳分离派的代表人物，他的作品以金色装饰和象征主义风格著称...</p>
+              <div class="blog-tags">
+                <span>维也纳分离派</span>
+                <span>克里姆特</span>
+                <span>象征主义</span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- Article Detail Page -->
     <section id="article" class="page">
-      <div class="container">
+      <div class="article-hero" id="articleHero">
+        <!-- Dynamic hero image -->
+      </div>
+      <div class="container article-container">
         <button class="back-btn" id="backBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -194,59 +290,145 @@
       </div>
     </section>
 
-    <!-- About Page -->
+    <!-- About Page - 重构为故事化叙述 -->
     <section id="about" class="page">
-      <div class="container">
-        <div class="about-header">
-          <div class="avatar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
-              <path d="M12 14c-3.5 0-6.5 2-8 5h16c-1.5-3-4.5-5-8-5z"/>
-            </svg>
+      <div class="about-hero">
+        <div class="about-hero-content">
+          <div class="about-avatar">
+            <img src="images/avatar-placeholder.jpg" alt="Avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="avatar-fallback" style="display:none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                <path d="M12 14c-3.5 0-6.5 2-8 5h16c-1.5-3-4.5-5-8-5z"/>
+              </svg>
+            </div>
           </div>
           <h1 data-i18n="aboutTitle">关于我</h1>
-          <p data-i18n="aboutDesc">一个热爱艺术与技术的创作者</p>
+          <p class="about-tagline" data-i18n="aboutTagline">在艺术与技术之间寻找自己的表达方式</p>
         </div>
-
-        <div class="about-sections">
-          <div class="about-card">
-            <h2 data-i18n="introTitle">简介</h2>
-            <p data-i18n="introText">你好，我是 Art Blog 的创作者。我是一名热爱艺术与技术的开发者。在这个博客中，我希望分享对世界名画的欣赏与思考，探索艺术背后的历史与文化。</p>
-            <p data-i18n="passionText">我相信艺术能够跨越时空，触动每一个人的心灵。无论是梵高的星空，还是维米尔的光影，都蕴含着人类最深刻的情感表达。</p>
-          </div>
-
-          <div class="about-card">
-            <h2 data-i18n="skillsTitle">技能与兴趣</h2>
-            <div class="skill-tags">
-              <span data-i18n="skill1">前端开发</span>
-              <span data-i18n="skill2">UI/UX 设计</span>
-              <span data-i18n="skill3">艺术史研究</span>
-              <span data-i18n="skill4">摄影</span>
+      </div>
+      
+      <div class="about-content">
+        <div class="container">
+          <!-- Story Section -->
+          <section class="about-section">
+            <h2 class="section-title" data-i18n="storyTitle">我的故事</h2>
+            <div class="about-story">
+              <p data-i18n="storyP1">初次遇见艺术，是在十岁那年。父亲带我去省博物馆看了一次印象派画展，莫奈的《睡莲》让我第一次感受到色彩可以如此流动、如此有生命力。那一刻，我知道自己的人生将与艺术结下不解之缘。</p>
+              <p data-i18n="storyP2">大学时我选择了计算机专业，白天学习代码，晚上泡在图书馆看艺术史。看似矛盾的两者，在我心中却奇妙地融合。代码的严谨逻辑与艺术的自由表达，其实是同一枚硬币的两面——都是人类创造力的体现。</p>
+              <p data-i18n="storyP3">毕业后我成为了一名前端工程师，但艺术始终是我灵魂的栖息地。每个周末，我都会去美术馆、画廊，或是在家中临摹大师作品。去年，我开始系统性地学习艺术史，并创建了这个博客，记录我的艺术探索之旅。</p>
             </div>
-          </div>
-
-          <div class="about-card">
-            <h2 data-i18n="contactTitle">联系方式</h2>
-            <div class="social-links">
-              <a href="mailto:hello@artblog.com" aria-label="Email">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
-              </a>
-              <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                </svg>
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                </svg>
-              </a>
+          </section>
+          
+          <!-- Philosophy Section -->
+          <section class="about-section">
+            <h2 class="section-title" data-i18n="philosophyTitle">艺术理念</h2>
+            <div class="philosophy-grid">
+              <div class="philosophy-card">
+                <div class="philosophy-icon">🎨</div>
+                <h3 data-i18n="philosophy1Title">艺术即语言</h3>
+                <p data-i18n="philosophy1Text">艺术是人类最原始也最精妙的表达方式。一幅画作可以跨越千年的时空，与观者进行无声的对话。</p>
+              </div>
+              <div class="philosophy-card">
+                <div class="philosophy-icon">💻</div>
+                <h3 data-i18n="philosophy2Title">技术为工具</h3>
+                <p data-i18n="philosophy2Text">数字时代赋予我们全新的创作工具。AI、VR、生成艺术——技术正在重新定义艺术的边界。</p>
+              </div>
+              <div class="philosophy-card">
+                <div class="philosophy-icon">🌟</div>
+                <h3 data-i18n="philosophy3Title">审美即生活</h3>
+                <p data-i18n="philosophy3Text">艺术不应只在博物馆里，它应该融入日常。从一杯咖啡的拉花到城市建筑的线条，美无处不在。</p>
+              </div>
             </div>
-          </div>
+          </section>
+          
+          <!-- Timeline Section -->
+          <section class="about-section">
+            <h2 class="section-title" data-i18n="timelineTitle">艺术足迹</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">2010</div>
+                <div class="timeline-content">
+                  <h4 data-i18n="timeline1Title">初次邂逅</h4>
+                  <p data-i18n="timeline1Text">省博物馆印象派画展，遇见莫奈的《睡莲》</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2015</div>
+                <div class="timeline-content">
+                  <h4 data-i18n="timeline2Title">开始临摹</h4>
+                  <p data-i18n="timeline2Text">系统学习素描与水彩，临摹梵高、塞尚作品</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2019</div>
+                <div class="timeline-content">
+                  <h4 data-i18n="timeline3Title">欧洲之旅</h4>
+                  <p data-i18n="timeline3Text">卢浮宫、乌菲兹、普拉多——亲眼见证大师真迹</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2023</div>
+                <div class="timeline-content">
+                  <h4 data-i18n="timeline4Title">创建博客</h4>
+                  <p data-i18n="timeline4Text">开始系统性地记录和分享艺术学习心得</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Gallery Section -->
+          <section class="about-section">
+            <h2 class="section-title" data-i18n="galleryTitle">我的作品</h2>
+            <div class="personal-gallery">
+              <div class="gallery-item">
+                <img src="images/starry-night.jpg" alt="My work 1">
+                <span>临摹 · 星月夜</span>
+              </div>
+              <div class="gallery-item">
+                <img src="images/pearl-earring.jpg" alt="My work 2">
+                <span>摄影 · 光影</span>
+              </div>
+              <div class="gallery-item">
+                <img src="images/the-kiss.jpg" alt="My work 3">
+                <span>数字艺术 · 抽象</span>
+              </div>
+              <div class="gallery-item">
+                <img src="images/mona-lisa.jpg" alt="My work 4">
+                <span>素描 · 肖像</span>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Contact Section -->
+          <section class="about-section">
+            <h2 class="section-title" data-i18n="contactTitle">与我联系</h2>
+            <div class="contact-section">
+              <p data-i18n="contactText">如果你也对艺术充满热情，或者有任何想法想要交流，欢迎通过以下方式联系我。</p>
+              <div class="social-links">
+                <a href="mailto:hello@artblog.com" aria-label="Email">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                  <span>Email</span>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                  </svg>
+                  <span>GitHub</span>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                  </svg>
+                  <span>Twitter</span>
+                </a>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </section>
@@ -255,8 +437,9 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
-      <p data-i18n="footer">用热爱构建</p>
-      <p>&copy; 2024 Art Blog. MIT License.</p>
+      <p class="footer-quote" data-i18n="footerQuote">"艺术洗去了灵魂中日常生活的灰尘。"</p>
+      <p class="footer-author" data-i18n="footerAuthor">—— 巴勃罗·毕加索</p>
+      <p class="footer-copy">&copy; 2024 Art Blog. Crafted with passion.</p>
     </div>
   </footer>
 
