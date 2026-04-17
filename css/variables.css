@@ -1,41 +1,47 @@
-/* ===== CSS Variables ===== */
+/* ===== CSS Variables - Modern Artistic Design ===== */
 :root {
-  /* New Color Palette - Sophisticated & Artistic */
-  --bg-primary: #faf9f7;
-  --bg-secondary: #f5f3f0;
-  --bg-tertiary: #ebe8e3;
+  /* Enhanced Color Palette - More Vibrant & Dynamic */
+  --bg-primary: #faf8f5;
+  --bg-secondary: #f0ede8;
+  --bg-tertiary: #e8e4dd;
   
-  /* Text Colors */
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a4a4a;
-  --text-tertiary: #7a7a7a;
-  --text-muted: #a0a0a0;
+  /* Text Colors with Better Contrast */
+  --text-primary: #0f0f0f;
+  --text-secondary: #3d3d3d;
+  --text-tertiary: #6b6b6b;
+  --text-muted: #9a9a9a;
   
-  /* Accent Colors */
-  --accent-gold: #c9a227;
-  --accent-gold-light: #d4b43a;
+  /* Refined Accent Colors - Art Gallery Style */
+  --accent-gold: #b8860b;
+  --accent-gold-light: #d4a84b;
+  --accent-gold-dark: #8b6914;
   --accent-burgundy: #722f37;
   --accent-navy: #1e3a5f;
+  --accent-terracotta: #c65d3b;
+  --accent-sage: #7d9b76;
   
-  /* UI Elements */
-  --border-color: #e5e2dc;
-  --card-bg: rgba(255, 255, 255, 0.95);
-  --card-bg-hover: #ffffff;
-  --overlay-bg: rgba(0, 0, 0, 0.4);
-  --overlay-dark: rgba(0, 0, 0, 0.7);
+  /* UI Elements with Glassmorphism */
+  --border-color: rgba(0, 0, 0, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --overlay-dark: rgba(0, 0, 0, 0.8);
   
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+  /* Enhanced Shadows - More Depth */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04), 0 10px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1), 0 20px 48px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.12), 0 40px 80px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 40px rgba(184, 134, 11, 0.15);
   
-  /* Typography */
+  /* Typography - Art Gallery Feel */
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Source Han Serif CN', 'Noto Serif SC', Georgia, serif;
   --font-mono: 'Maple Mono', 'SF Mono', 'Fira Code', monospace;
   
-  /* Spacing */
+  /* Spacing - More Breathing Room */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
@@ -44,34 +50,44 @@
   --space-2xl: 6rem;
   --space-3xl: 10rem;
   
-  /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-base: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  /* Transitions - Smoother */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* New: Gradient Definitions */
+  --gradient-gold: linear-gradient(135deg, #b8860b 0%, #d4a84b 50%, #b8860b 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);
+  --gradient-card: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
 }
 
 [data-theme="dark"] {
-  /* Dark Theme */
-  --bg-primary: #0f0f12;
-  --bg-secondary: #1a1a1f;
-  --bg-tertiary: #25252b;
+  /* Dark Theme - Museum Night Mode */
+  --bg-primary: #0a0a0c;
+  --bg-secondary: #121216;
+  --bg-tertiary: #1a1a20;
   
-  --text-primary: #f5f5f5;
-  --text-secondary: #c0c0c0;
-  --text-tertiary: #909090;
-  --text-muted: #606060;
+  --text-primary: #fafafa;
+  --text-secondary: #c8c8c8;
+  --text-tertiary: #969696;
+  --text-muted: #646464;
   
-  --accent-gold: #d4b43a;
-  --accent-gold-light: #e0c44a;
+  --accent-gold: #d4a84b;
+  --accent-gold-light: #e8c878;
+  --accent-gold-dark: #b8860b;
   
-  --border-color: #2a2a30;
-  --card-bg: rgba(30, 30, 35, 0.95);
-  --card-bg-hover: #25252b;
-  --overlay-bg: rgba(0, 0, 0, 0.6);
-  --overlay-dark: rgba(0, 0, 0, 0.85);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(20, 20, 25, 0.85);
+  --card-bg-hover: rgba(30, 30, 35, 0.95);
+  --glass-bg: rgba(20, 20, 25, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+  --overlay-dark: rgba(0, 0, 0, 0.9);
   
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4), 0 20px 48px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5), 0 40px 80px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 60px rgba(212, 168, 75, 0.2);
 }

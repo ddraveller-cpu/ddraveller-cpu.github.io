@@ -1,41 +1,140 @@
-/* ===== Footer - Elegant Quote Style ===== */
+/* ===== Footer - Modern Gallery Style ===== */
 .footer {
-  background: var(--bg-secondary);
-  padding: var(--space-2xl) var(--space-md);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  padding: var(--space-3xl) var(--space-md);
   text-align: center;
-  border-top: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative top border */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+/* Decorative background elements */
+.footer::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(184, 134, 11, 0.03) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .footer-content {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Quote mark decoration */
+.footer-content::before {
+  content: '"';
+  font-family: var(--font-display);
+  font-size: 8rem;
+  color: var(--accent-gold);
+  opacity: 0.1;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .footer-quote {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-style: italic;
   color: var(--text-primary);
-  margin-bottom: var(--space-sm);
-  line-height: 1.5;
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+  position: relative;
 }
 
 .footer-author {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  margin-bottom: var(--space-lg);
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-xl);
+  font-weight: 500;
+}
+
+.footer-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-gold);
+  margin: 0 auto var(--space-xl);
+  border-radius: 2px;
 }
 
 .footer-copy {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Scroll to top button */
+.scroll-top {
+  position: absolute;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  width: 50px;
+  height: 50px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  z-index: 10;
+}
+
+.scroll-top:hover {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow);
+}
+
+.scroll-top svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .footer {
+    padding: var(--space-2xl) var(--space-md);
+  }
+  
   .footer-quote {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
+  }
+  
+  .footer-content::before {
+    font-size: 6rem;
+    top: -30px;
+  }
+  
+  .scroll-top {
+    display: none;
   }
 }
